@@ -18,7 +18,7 @@ class WeatherController extends AbstractController
     public function index()
     {
         $client = new Client();
-        $response = $client->request('GET', 'http://localhost:4000/graphql?query={forecast(city:"chicago"){day date low high text code}}');
+        $response = $client->request('GET', 'http://localhost:4000/graphql?query={forecast(city:"casablanca"){day date low high text code}}');
 
         $forecast = $response->getBody()->getContents();
         $forecast = json_decode($forecast);
