@@ -16,9 +16,13 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                        <h2 class="card-title">Choose your city from here</h2>
+                        <select id="city" class="mdb-select md-form" searchable="Search here..">
+                            <option value="" disabled selected>Choose your country</option>
+                            {% for city in cities %}
+                                <option value="{{ loop.index }}">{{ city }}</option>
+                            {% endfor %}
+                        </select>
                     </div>
                 </div>
             </div>
@@ -97,4 +101,12 @@
         </div>
     </div>
 
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#city").onchange(function(){
+                $.ajax('POST', );
+            });
+
+        });    </script>
 {% endblock body %}
