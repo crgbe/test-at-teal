@@ -1,0 +1,100 @@
+{% extends "base.html.twig" %}
+
+
+{% block title %}{{ parent() }} {% endblock title %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/weather.css') }}">
+{% endblock stylesheets %}
+
+{% block body %}
+
+    <div class="container-fluid custom">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Special title treatment</h5>
+                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <a href="#!" class="btn btn-primary">Go somewhere</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <!-- Table with panel -->
+                <div class="card card-cascade narrower">
+
+                    <!--Card image-->
+                    <div
+                            class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+
+                        <div class="px-4">
+                        </div>
+
+                        <h1><a href="" class="white-text mx-3"><b>Weather TEST AT TEAL</b></a></h1>
+
+                        <div class="px-4">
+                        </div>
+
+                    </div>
+                    <!--/Card image-->
+
+                    <div class="px-4">
+
+                        <div class="table-wrapper">
+                            <!--Table-->
+                            <table class="table table-hover mb-0">
+
+                                <!--Table head-->
+                                <thead>
+                                <tr>
+                                    <th class="th-lg">
+                                        <a><b>Day</b></a>
+                                    </th>
+                                    <th class="th-lg">
+                                        <a><b>Date</b></a>
+                                    </th>
+                                    <th class="th-lg">
+                                        <a><b>Low</b></a>
+                                    </th>
+                                    <th class="th-lg">
+                                        <a><b>High</b></a>
+                                    </th>
+                                    <th class="th-lg">
+                                        <a><b>Text</b></a>
+                                    </th>
+                                    <th class="th-lg">
+                                        <a><b>Code</b></a>
+                                    </th>
+                                </tr>
+                                </thead>
+                                <!--Table head-->
+
+                                <!--Table body-->
+                                <tbody>
+                                <tr>
+                                    <td>{{ forecast.data.forecast.day }}</td>
+                                    <td>{{ forecast.data.forecast.date }}</td>
+                                    <td>{{ forecast.data.forecast.low }}</td>
+                                    <td>{{ forecast.data.forecast.high }}</td>
+                                    <td>{{ forecast.data.forecast.text }}</td>
+                                    <td>{{ forecast.data.forecast.code }}</td>
+                                </tr>
+                                </tbody>
+                                <!--Table body-->
+                            </table>
+                            <!--Table-->
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- Table with panel -->
+            </div>
+        </div>
+    </div>
+
+{% endblock body %}

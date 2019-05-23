@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>{% block title %}Test at teal{% endblock %}</title>
+        {% block stylesheets %}
+            <!-- Font Awesome -->
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
+            <!-- Bootstrap core CSS -->
+            <link href="{{ asset('mdb-free_4.8.1/css/bootstrap.min.css') }}" rel="stylesheet">
+            <!-- Material Design Bootstrap -->
+            <link href="{{ asset('mdb-free_4.8.1/css/mdb.min.css') }}" rel="stylesheet">
+            <!-- Your custom styles (optional) -->
+            <link href="{{ asset('mdb-free_4.8.1/css/style.css') }}" rel="stylesheet">
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}
+
+
+
+        {% endblock %}
+
+
+        {% block javascripts %}
+            <!-- SCRIPTS -->
+            <!-- JQuery -->
+            <script type="text/javascript" src="{{ asset('mdb-free_4.8.1/js/jquery-3.4.0.min.js') }}"></script>
+            <!-- Bootstrap tooltips -->
+            <script type="text/javascript" src="{{ asset('mdb-free_4.8.1/js/popper.min.js') }}"></script>
+            <!-- Bootstrap core JavaScript -->
+            <script type="text/javascript" src="{{ asset('mdb-free_4.8.1/js/bootstrap.min.js') }}"></script>
+            <!-- MDB core JavaScript -->
+            <script type="text/javascript" src="{{ asset('mdb-free_4.8.1/js/mdb.min.js') }}"></script>
+        {% endblock %}
+    </body>
+</html>
