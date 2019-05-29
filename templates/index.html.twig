@@ -20,7 +20,7 @@
                         <select id="city" class="mdb-select md-form" searchable="Search here..">
                             <option value="" disabled selected>Choose your country</option>
                             {% for city in cities %}
-                                <option value="{{ loop.index }}">{{ city }}</option>
+                                <option value="{{ loop.index0 }}" {{ city == 'casablanca' ? "selected" : "" }}>{{ city }}</option>
                             {% endfor %}
                         </select>
                     </div>
@@ -78,15 +78,28 @@
                                 <!--Table head-->
 
                                 <!--Table body-->
-                                <tbody>
-                                <tr>
-                                    <td>{{ forecast.data.forecast.day }}</td>
-                                    <td>{{ forecast.data.forecast.date }}</td>
-                                    <td>{{ forecast.data.forecast.low }}</td>
-                                    <td>{{ forecast.data.forecast.high }}</td>
-                                    <td>{{ forecast.data.forecast.text }}</td>
-                                    <td>{{ forecast.data.forecast.code }}</td>
-                                </tr>
+                                <tbody id="forecastList">
+                                {% if forecast is defined %}
+                                    <tr>
+                                        <td>{{ forecast.data.forecast.day }}</td>
+                                        <td>{{ forecast.data.forecast.date }}</td>
+                                        <td>{{ forecast.data.forecast.low }}</td>
+                                        <td>{{ forecast.data.forecast.high }}</td>
+                                        <td>{{ forecast.data.forecast.text }}</td>
+                                        <td>{{ forecast.data.forecast.code }}</td>
+                                    </tr>
+                                {% elseif forecasts is defined %}
+                                    {% for forecast in forecasts %}
+                                        <tr>
+                                            <td>{{ forecast.day }}</td>
+                                            <td>{{ forecast.date }}</td>
+                                            <td>{{ forecast.low }}</td>
+                                            <td>{{ forecast.high }}</td>
+                                            <td>{{ forecast.text }}</td>
+                                            <td>{{ forecast.code }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endif %}
                                 </tbody>
                                 <!--Table body-->
                             </table>
@@ -102,11 +115,52 @@
     </div>
 
 
-    <script type="text/javascript">
-        $(document).ready(function(){
-            $("#city").onchange(function(){
-                $.ajax('POST', );
-            });
+    {% block javascripts %}
+        {{ parent() }}
 
-        });    </script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $('#city').change(function(){
+                    var cityIndex = $('option:selected', this).attr('value');
+                    console.log(cityIndex);
+
+
+                    $.ajax({
+                        url: "/weather/" + cityIndex,
+                        dataType: 'json',
+                        method: "POST",
+                        success: function(data){
+                            data = $.parseJSON(data);
+                            var output = '';
+
+                            output += '<tr>';
+                            output += '<td>'+ data.forecasts[1].day +'</td>';
+                            output += '<td>'+ data.forecasts[1].date +'</td>';
+                            output += '<td>'+ data.forecasts[1].low +'</td>';
+                            output += '<td>'+ data.forecasts[1].high +'</td>';
+                            output += '<td>'+ data.forecasts[1].text +'</td>';
+                            output += '<td>'+ data.forecasts[1].code +'</td>';
+                            output += '</tr>';
+
+
+                            // $.each(data.forecasts, function(key, val){
+                            //     output += '<tr>';
+                            //     output += '<td>'+ val.day +'</td>';
+                            //     output += '<td>'+ val.date +'</td>';
+                            //     output += '<td>'+ val.low +'</td>';
+                            //     output += '<td>'+ val.high +'</td>';
+                            //     output += '<td>'+ val.text +'</td>';
+                            //     output += '<td>'+ val.code +'</td>';
+                            //     output += '</tr>';
+                            // });
+
+                            $('#forecastList').html(output);
+                        }
+                    });//ajax for grabing back all the forecast
+                });
+            });//ready
+        </script>
+    {% endblock javascripts %}
+
+
 {% endblock body %}
